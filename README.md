@@ -1,2 +1,2 @@
 # decode
-Decode and analyze next generation sequencing data from DNA-Encoded Library screening 
+Decode and analyze NGS(next generation sequencing) data from DNA-Encoded Library screening 
