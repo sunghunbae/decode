@@ -1,12 +1,14 @@
 # decode
 Decode and analyze NGS(next generation sequencing) data from DNA-Encoded Library screening 
 
-# input - building block data file
+## input - building block data file
+<pre>
 GCTGCC FAa-001 10K DEL 1
 GCTTGC FAa-002 10K DEL 1
 GCTGAC FAa-003 10K DEL 1
 GCTGAG FAa-004 10K DEL 1
 (--- omitted ---)
+</pre>
 
 column 1 : sequence tag for a building block
 column 2 : name or molecule code for a building block
