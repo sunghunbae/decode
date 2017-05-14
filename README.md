@@ -9,10 +9,9 @@ GCTGAC FAa-003 10K DEL 1
 GCTGAG FAa-004 10K DEL 1
 (--- omitted ---)
 </pre>
-
-column 1 : sequence tag for a building block
-column 2 : name or molecule code for a building block
-column 3 ... : any extra information
-last column : building cycle number (a same building block can be used with different sequence tags for different building cycles)
+- column 1 : sequence tag for a building block
+- column 2 : name or molecule code for a building block
+- column 3 ... : any extra information
+- last column : building cycle number (a same building block can be used with different sequence tags for different building cycles)
 
 # fastq file format
