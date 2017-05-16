@@ -49,11 +49,9 @@ is equivalent to
 AAATCGATGTG{6}GAG{6}AGT{6}CGAACTGAATCTACT(12)TCAGACAAGCTTCACCTGC
 ```
 
-Both of above example files describe an identical DNA encoding scheme in which 3 building blocks of 6 bases and a random sequence of 12 bases are placed between defined constant DNA sequence blocks(i.e. opening, cycle, closing, terminal tag sequences). Sequences surounding the **{}** or **()** blocks should match with the NGS data, but not necessarily from the very end of sequence. For example, the following sequence satisfies the above encoding scheme.
+Both of above example files describe an identical DNA encoding scheme in which 3 building blocks of 6 bases and a random sequence of 12 bases are placed between defined constant DNA sequence blocks(i.e. opening, cycle, closing, terminal tag sequences). NGS sequences are to be aligned with the encoding scheme. For instance, the following sequence satisfies the above encoding scheme.
 
-```
-AGTTGACTCCC AAATCGATGTG TGTATG GAG GCTATG AGT GCTGGCCGAACTGAATCTACTAGGGAGAGTGCGTCAGACAAGCTTCACCTGCAATAGATCG
-```
+```AGTTGACTCCC```**AAATCGATGTG***__TGTATG__**GAG**__GCTATG__**AGT**__GCTGGC__```CGAACTGAATCTACT```__AGGGAGAGTGCG__**TCAGACAAGCTTCACCTGC**```AATAGATCG```
 
 ## Building block data file format (-b filename or --bbseq=filename)
 
