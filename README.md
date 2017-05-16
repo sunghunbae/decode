@@ -24,7 +24,7 @@ A text file with single or multiple lines describes a DNA sequence design encodi
 - {#}: Sequence of # bases encoding a building block. The building block numbers 1, 2, ... are assigned sequentially from the 5' end.
 - (#): Sequence of # bases encoding a random sequence to test if hit count is biased by PCR amplification.
 
-### Examples
+### Example (encoding.txt)
 
 ```
 AAATCGATGTG
@@ -48,7 +48,10 @@ Both of above example files describe an identical DNA encoding scheme in which 3
 AGTTGACTCCC AAATCGATGTG TGTATG GAG GCTATG AGT GCTGGCCGAACTGAATCTACTAGGGAGAGTGCGTCAGACAAGCTTCACCTGCAATAGATCG
 ```
 
-## Building block data file format
+## Building block data file format 
+
+### Example (BBS.txt)
+
 ```
 GCTGCC FAa-001 1 10K DEL
 GCTTGC FAa-002 1 10K DEL
@@ -67,6 +70,7 @@ GCTTTC FAa-005 1 10K DEL
 
 In FASTQ format, every second line in a record contains DNA sequence.
 
+### Example (testlg.fastq)
 ```
 @MG00HS13:1108:H7TNJBCXY:1:1101:1744:2114 1:N:0:CGATGT
 AGTTGACTCCCAAATCGATGTGTGTATGGAGGCTATGAGTGCTGGCCGAACTGAATCTACTAGGGAGAGTGCGTCAGACAAGCTTCACCTGCAATAGATCG
@@ -101,7 +105,7 @@ A related C++ source code was published in the supplementary material to the Zha
  Modified by Moreno Wichert & Adrian Rabenseifner, 23. Apr. 2012
 ```
 
-### structure.txt
+### structure.txt - DNA encoding scheme
 
 It is a main input file describing DNA encoding structure.
 
