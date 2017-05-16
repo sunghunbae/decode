@@ -1,7 +1,7 @@
 # decode
 Decode and analyze NGS(next generation sequencing) data from DNA-Encoded Library screening 
 
-## usage
+## How to use
 <pre>
 Usage: decode.py [options]
 
@@ -15,11 +15,11 @@ Options:
   -r, --revcomp         option for reverse complementary trial
 </pre>
 
-## encoding file format
-A text file with single or multiples lines explain sequence design for encoding building block information and random sequence.
+## DNA encoding file format
+A text file with single or multiple lines describes a DNA sequence design encoding building blocks and a random sequence.
 
-* {#} - sequence of # bases containing building block information. building block 1, 2, ... are assigned from the 5' end of the sequence.
-* (#) - sequence of # bases containing random sequence to check out whether hit count is biased by PCR amplification or not.
+* {#} - sequence of # bases encoding a building block. The building block numbers 1, 2, ... are assigned sequentially from the 5' end.
+* (#) - sequence of # bases encoding a random sequence to test if hit count is biased by PCR amplification.
 
 <pre>
 AAATCGATGTG
@@ -31,13 +31,17 @@ ACTGAATCTACT
 TCAGACAAGCTTCACCTGC
 </pre>
 
-In this example encoding, there are three building blocks with six bases and a random sequence with twelve bases.  Sequences surounding the {} or () blocks should match with the NGS data, but not necessarily from the 5'-end. For example, the following sequence satisfies the encoding scheme.
+is equivalent to
+
+<pre>AAATCGATGTG{6}GAG{6}AGT{6}CGAACTGAATCTACT(12)TCAGACAAGCTTCACCTGC</pre>
+
+Both of above example files describe an identical DNA encoding scheme in which 3 building blocks of 6 bases and a random sequence of 12 bases are placed between defined constant DNA sequence blocks(i.e. opening, cycle, closing, terminal tag sequences). Sequences surounding the {} or () blocks should match with the NGS data, but not necessarily from the very end of sequence. For example, the following sequence satisfies the above encoding scheme.
 
 <pre>
 AGTTGACTCCC AAATCGATGTG TGTATG GAG GCTATG AGT GCTGGCCGAACTGAATCTACTAGGGAGAGTGCGTCAGACAAGCTTCACCTGCAATAGATCG
 </pre>
 
-## building block data file format
+## Building block data file format
 <pre>
 GCTGCC FAa-001 1 10K DEL
 GCTTGC FAa-002 1 10K DEL
@@ -52,9 +56,10 @@ GCTTTC FAa-005 1 10K DEL
 - column 3 : building cycle number (a same building block can be used with different sequence tags for different building cycles)
 - column 4-: extra information
 
-## fastq file format
+## FASTQ file format
 
 <pre>
+
 @MG00HS13:1108:H7TNJBCXY:1:1101:1744:2114 1:N:0:CGATGT
 AGTTGACTCCCAAATCGATGTGTGTATGGAGGCTATGAGTGCTGGCCGAACTGAATCTACTAGGGAGAGTGCGTCAGACAAGCTTCACCTGCAATAGATCG
 +
@@ -64,6 +69,7 @@ AGTTGACTCCCAAATCGATGTGTGTGGCGAGGCTGGCAGTGCTATCCGAACTGAATCGACTAGAGGCATCCGGTCAGACA
 +
 B0@<DH@1<11D<FHFH1C<CCGEEEHHH//C/<F=0FG@FEH1FC?C0D/DC<D<@1<<CE<GH1GHGF?C/<<C1<FF@FEECCCG11<@H@EHIH<<E
 ......
+
 </pre>
 
 ## How to run the test
@@ -74,9 +80,11 @@ python ../decode.py -b BBS.txt -e encoding.txt -p bae ../data/testlg.fastq
 </pre>
 
 ## Comparison to Zhang et al. (2017)
+
 A related C++ source code was published in the supplementary material to the Zhang et al. (2017) paper on the DNA-encoded library
 
 ### Credits
+
 <pre>
  Written by Yixin Zhang
  Modified by Hannes Röst, November 2009
@@ -88,7 +96,8 @@ A related C++ source code was published in the supplementary material to the Zha
 
 ### structure.txt
 
-It is a main input file describing DNA encoding structure
+It is a main input file describing DNA encoding structure.
+
 <pre>
 ../../data/testlg.fasta
 50
@@ -129,3 +138,5 @@ GCTGAG
 GCTTTC
 .....
 </pre>
+
+
