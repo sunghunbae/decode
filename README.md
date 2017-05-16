@@ -19,10 +19,10 @@ Options:
 A text file with single or multiple lines describes a DNA sequence design encoding building blocks and a random sequence.
 
 * {#}
-... Sequence of # bases encoding a building block. 
-... The building block numbers 1, 2, ... are assigned sequentially from the 5' end.
+...Sequence of # bases encoding a building block. 
+...The building block numbers 1, 2, ... are assigned sequentially from the 5' end.
 * (#)
-... Sequence of # bases encoding a random sequence to test if hit count is biased by PCR amplification.
+...Sequence of # bases encoding a random sequence to test if hit count is biased by PCR amplification.
 
 ```
 AAATCGATGTG
@@ -59,7 +59,7 @@ GCTTTC FAa-005 1 10K DEL
 - Column 1: Sequence tag for a building block
 - Column 2: Name or molecule code for a building block
 - Column 3: Building cycle number.
-... A same building block can be used with different sequence tags for different building cycles.
+...A same building block can be used with different sequence tags for different building cycles.
 - Column 4 and the following columns may contain extra information not used in the program.
 
 ## FASTQ file format
