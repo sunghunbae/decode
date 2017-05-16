@@ -15,7 +15,14 @@ Options:
   -r, --revcomp         option for reverse complementary trial
 ```
 
-## DNA encoding file format
+## How to run the test data
+
+```
+cd test
+python ../decode.py -b BBS.txt -e encoding.txt -p bae ../data/testlg.fastq
+```
+
+## DNA encoding file format (-e filename or --encoding=filename)
 
 A text file with single or multiple lines describes a DNA sequence design encoding building blocks and a random sequence.
 
@@ -48,7 +55,7 @@ Both of above example files describe an identical DNA encoding scheme in which 3
 AGTTGACTCCC AAATCGATGTG TGTATG GAG GCTATG AGT GCTGGCCGAACTGAATCTACTAGGGAGAGTGCGTCAGACAAGCTTCACCTGCAATAGATCG
 ```
 
-## Building block data file format 
+## Building block data file format (-b filename or --bbseq=filename)
 
 ### Example (BBS.txt)
 
@@ -83,12 +90,6 @@ B0@<DH@1<11D<FHFH1C<CCGEEEHHH//C/<F=0FG@FEH1FC?C0D/DC<D<@1<<CE<GH1GHGF?C/<<C1<FF
 ......
 ```
 
-## How to run the test
-
-```
-cd test
-python ../decode.py -b BBS.txt -e encoding.txt -p bae ../data/testlg.fastq
-```
 
 ## Comparison to Zhang et al. (2017)
 
