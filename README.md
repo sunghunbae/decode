@@ -19,9 +19,10 @@ Options:
 A text file with single or multiple lines describes a DNA sequence design encoding building blocks and a random sequence.
 
 * {#}
-> sequence of # bases encoding a building block. The building block numbers 1, 2, ... are assigned sequentially from the 5' end.
+... Sequence of # bases encoding a building block. 
+... The building block numbers 1, 2, ... are assigned sequentially from the 5' end.
 * (#)
-> sequence of # bases encoding a random sequence to test if hit count is biased by PCR amplification.
+... Sequence of # bases encoding a random sequence to test if hit count is biased by PCR amplification.
 
 ```
 AAATCGATGTG
@@ -39,7 +40,7 @@ is equivalent to
 AAATCGATGTG{6}GAG{6}AGT{6}CGAACTGAATCTACT(12)TCAGACAAGCTTCACCTGC
 ```
 
-Both of above example files describe an identical DNA encoding scheme in which 3 building blocks of 6 bases and a random sequence of 12 bases are placed between defined constant DNA sequence blocks(i.e. opening, cycle, closing, terminal tag sequences). Sequences surounding the {} or () blocks should match with the NGS data, but not necessarily from the very end of sequence. For example, the following sequence satisfies the above encoding scheme.
+Both of above example files describe an identical DNA encoding scheme in which 3 building blocks of 6 bases and a random sequence of 12 bases are placed between defined constant DNA sequence blocks(i.e. opening, cycle, closing, terminal tag sequences). Sequences surounding the **{}** or **()** blocks should match with the NGS data, but not necessarily from the very end of sequence. For example, the following sequence satisfies the above encoding scheme.
 
 ```
 AGTTGACTCCC AAATCGATGTG TGTATG GAG GCTATG AGT GCTGGCCGAACTGAATCTACTAGGGAGAGTGCGTCAGACAAGCTTCACCTGCAATAGATCG
@@ -55,11 +56,11 @@ GCTTTC FAa-005 1 10K DEL
 ......
 ```
 
-Columns
-1. Sequence tag for a building block
-2. Name or molecule code for a building block
-3. Bbuilding cycle number (a same building block can be used with different sequence tags for different building cycles)
-4-. Extra information
+- Column 1: Sequence tag for a building block
+- Column 2: Name or molecule code for a building block
+- Column 3: Building cycle number.
+... A same building block can be used with different sequence tags for different building cycles.
+- Column 4 and the following columns may contain extra information not used in the program.
 
 ## FASTQ file format
 
