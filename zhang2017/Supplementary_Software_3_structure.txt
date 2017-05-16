@@ -1,0 +1,12 @@
+sequences/HTDS_data.fasta
+50
+20	5	575	213
+2bb
+0
+x	1	6	codelists/codelist1.txt
+y	87	92	codelists/codelist2.txt
+z	31	36	codelists/codelist3.txt
+$	58	65	codelists/codelist4.txt
+1	7	30	GGAGCTTCTGAATTCTGTGTGCTG
+2	37	57	CGAGTCCCATGGCGCAGCTGC
+3	66	86	CACGGATCCATTCGATGCAGG

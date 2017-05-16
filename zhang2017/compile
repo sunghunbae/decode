@@ -1,0 +1,1 @@
+g++ -o zhang2017 Supplementary_Software_2_count.cpp -lpthread

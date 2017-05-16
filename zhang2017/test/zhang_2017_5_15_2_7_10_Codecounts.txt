@@ -1,0 +1,101 @@
+../../data/testlg.fasta
+The total number of sequences received is: 91946
+Total number of sequences used for Code analysis:	31317
+The structure of your inputed data is following: 
+
+The code lists are: 
+23-28   bb1.txt
+32-37   bb2.txt
+41-46   bb3.txt
+The constant regions are: 
+12-22   AAATCGATGTG
+29-31   GAG
+38-40   AGT
+47-49   CGA
+50-61   ACTGAATCTACT
+
+
+Assigned to codelist 1
+0	195
+1	1515
+2	1416
+3	944
+4	1618
+5	1228
+6	1585
+7	1266
+8	1304
+9	1559
+10	1173
+11	1553
+12	1142
+13	1541
+14	1361
+15	1502
+16	1247
+17	1080
+18	1537
+19	1356
+20	1390
+21	1445
+22	864
+23	1494
+Assigned to codelist 2
+0	173
+1	1128
+2	895
+3	1554
+4	1591
+5	1286
+6	1660
+7	1392
+8	1440
+9	1427
+10	994
+11	1417
+12	1548
+13	1409
+14	1310
+15	1266
+16	1496
+17	1061
+18	1364
+19	963
+20	1383
+21	1227
+22	1007
+23	1301
+24	1023
+Assigned to codelist 3
+0	1137
+1	143
+2	1037
+3	1025
+4	1152
+5	1218
+6	1115
+7	1207
+8	1104
+9	1188
+10	955
+11	1010
+12	1055
+13	1022
+14	1138
+15	1169
+16	973
+17	1098
+18	923
+19	1113
+20	1036
+21	1085
+22	1155
+23	1001
+24	1291
+25	1113
+26	1419
+27	1224
+28	1209
+The average frequency is: 3
+The highest frequency is: 10
+The lowest frequency is: 0

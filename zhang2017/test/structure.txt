@@ -1,0 +1,13 @@
+../../data/testlg.fasta
+50
+23 	24 	28	0
+2BB
+0
+1	12	22	AAATCGATGTG
+x	23	28	bb1.txt
+2	29	31	GAG
+y	32	37	bb2.txt
+3	38	40	AGT
+z	41	46	bb3.txt
+4	47	49	CGA
+5	50	61	ACTGAATCTACT
