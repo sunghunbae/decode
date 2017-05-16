@@ -1,7 +1,7 @@
 # decode
 Decode and analyze NGS(next generation sequencing) data from DNA-Encoded Library screening 
 
-## How to use
+## How to use (-h or --help)
 ```
 Usage: decode.py [options]
 
