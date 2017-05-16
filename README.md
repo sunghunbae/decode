@@ -63,20 +63,20 @@ DDDDDIIIIIIIHIIIHI?HHHHHHHIHIIIIHIIIFGHIHHIHGHHHIIIHIIIIH1CFHIHHI?CCHCEHHHHHHHII
 AGTTGACTCCCAAATCGATGTGTGTGGCGAGGCTGGCAGTGCTATCCGAACTGAATCGACTAGAGGCATCCGGTCAGACAAGCTTCACGTGCAATAGATCG
 +
 B0@<DH@1<11D<FHFH1C<CCGEEEHHH//C/<F=0FG@FEH1FC?C0D/DC<D<@1<<CE<GH1GHGF?C/<<C1<FF@FEECCCG11<@H@EHIH<<E
-
 ......
 </pre>
 
-## test run
+## How to run the test
+
 <pre>
 cd test
 python ../decode.py -b BBS.txt -e encoding.txt -p bae ../data/testlg.fastq
 </pre>
 
-## comparison to Zhang et al. (2017)
+## Comparison to Zhang et al. (2017)
 A related C++ source code was published in the supplementary material to the Zhang et al. (2017) paper on the DNA-encoded library
 
-### credit
+### Credits
 <pre>
  Written by Yixin Zhang
  Modified by Hannes Röst, November 2009
