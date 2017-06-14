@@ -35,15 +35,32 @@ def read_encoding ( filename ) :
 def read_building_block_sequence ( filename ) :
 	mapobj= {}
   	f= open(filename, 'r')
+	linenumber= 0
 	for line in f :
-		col= line.strip().split()
-		(seq,mol,cyc) = (col[0],col[1],col[2])
+		linenumber += 1
+		line= line.strip()
+		if line.startswith("#") :
+			continue
+		
+		col= line.split()
+		
+		try:
+			(seq,mol,cyc) = (col[0],col[1],col[2])
+		except:
+			print "[Error] expecting 3 columns for each line: <sequence> <building-block-id> <cycle-number>"
+			print "[Error] line %d: %s", linenumber, line
+			sys.exit(1)
+			
 		if not cyc in mapobj :
 			mapobj[cyc]= {}
+			
 		if seq in mapobj[cyc] :
-			print "Error (check duplicate)", line.strip()
+			print "[Error] identical sequence already assigned to a building block %s for cycle %s", mapobj[cyc][seq], cyc
+			print "[Error] line %d: %s", linenumber, line
+			sys.exit(2)
 		else:
 			mapobj[cyc][seq]= mol
+	
 	return mapobj
 
 
