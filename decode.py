@@ -48,15 +48,15 @@ def read_building_block_sequence ( filename ) :
 			(seq,mol,cyc) = (col[0],col[1],col[2])
 		except:
 			print "[Error] expecting 3 columns for each line: <sequence> <building-block-id> <cycle-number>"
-			print "[Error] line %d: %s", linenumber, line
+			print "[Error] line %d: %s" % (linenumber, line)
 			sys.exit(1)
 			
 		if not cyc in mapobj :
 			mapobj[cyc]= {}
 			
 		if seq in mapobj[cyc] :
-			print "[Error] identical sequence already assigned to a building block %s for cycle %s", mapobj[cyc][seq], cyc
-			print "[Error] line %d: %s", linenumber, line
+			print "[Error] identical sequence already assigned to a building block %s for cycle %s" % (mapobj[cyc][seq], cyc)
+			print "[Error] line %d: %s" % (linenumber, line)
 			sys.exit(2)
 		else:
 			mapobj[cyc][seq]= mol
