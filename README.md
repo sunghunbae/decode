@@ -14,8 +14,6 @@ Options:
   -b BBS, --bbseq=BBS   input building block sequence file
   -r, --revcomp         option to try reverse complementary seq.
 			in case of sequencing in both directions
-  -n, --normalize       option to normalize seq. count
-			with respect to the largest seq. count
 ```
 
 ## How to run the test data
@@ -91,12 +89,17 @@ B0@<DH@1<11D<FHFH1C<CCGEEEHHH//C/<F=0FG@FEH1FC?C0D/DC<D<@1<<CE<GH1GHGF?C/<<C1<FF
 ......
 ```
 
+## Use multiple FASTQ files for comparing different datasets
+
+A sequencing dataset of a target can be compared with a control dataset without the target protein, 
+or multiple sequencing datasets of different targets can be compared.
+The first FASTQ file is used to sort building blocks and the rest of the FASTQ files are compared
+with this first FASTQ file.
+
 
 ## Comparison to Zhang et al. (2017)
 
 A related C++ source code was published in the supplementary material to the Zhang et al. (2017) paper on the DNA-encoded library.
-
-### Credits
 
 ```
  Written by Yixin Zhang
