@@ -20,7 +20,7 @@ Options:
 
 ```
 cd test
-python ../decode.py -b BBS.txt -e encoding.txt -r -n -p bae ../data/testlg.fastq
+python ../decode.py -b BBS.txt -e encoding.txt -r -p bae ../data/testlg.fastq
 ```
 
 ## DNA encoding file format (-e filename or --encoding=filename)
@@ -95,6 +95,10 @@ A sequencing dataset of a target can be compared with a control dataset without 
 or multiple sequencing datasets of different targets can be compared.
 The first FASTQ file is used to sort building blocks and the rest of the FASTQ files are compared
 with this first FASTQ file.
+
+```
+python ../decode.py -b BBS.txt -e encoding.txt -r -p bae ../data/testlg.fastq ../data/testsm.fastq
+```
 
 
 ## Comparison to Zhang et al. (2017)
