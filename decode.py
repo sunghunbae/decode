@@ -112,27 +112,41 @@ parser.add_option(
 	dest= "revcomp",
 	action= "store_true",
 	default= False, 
-	help="option for reverse complementary trial")
+	help="option to try reverse complementary seq.")
+
+parser.add_option(
+	"-n",
+	"--normalize",
+	dest= "normalize",
+	action= "store_true",
+	default= False,
+	help="option to normalize seq. count")
+
 
 (options, args) = parser.parse_args()
 
-if options.revcomp : 
-	options.revcomp= True
+logfile= open(options.prefix+'.log','w')
 
+message= ' '.join(sys.argv)
+logfile.write(message+"\n\n")
 
 # read encoding scheme
 (scheme, numbb, numrs)= read_encoding ( options.encoding )
-print "read encoding scheme"
-print "regex=", scheme
-print "number of building blocks=", numbb
-print "number of random sequence blocks=", numrs
+message = "Reading encoding scheme from '%s'\n" % options.encoding
+message+= "regex= %s\n" % scheme
+message+= "number of building blocks= %d\n" % numbb
+message+= "number of random seq. blocks= %d\n" % numrs
+print message
+logfile.write(message+"\n")
 
 
 # read building block sequence info
 BBTag= read_building_block_sequence ( options.bbseq )
-print "read building block sequence info."
+message = "Reading building blocks from '%s'\n" % options.bbseq
+print message
+logfile.write(message+"\n")
 
-""" setup Count for combined building blocks
+""" data structure for 'Count', combined building blocks
 
   	Count[1] : single building block count
 		Count[1]['1']['bb1'] --> count
@@ -152,7 +166,7 @@ for i in range(1, numbb+1) :
 	for j in combinations(range(1,numbb+1),i) :
 		Count[i][''.join(map(str,j))]= {}
 
-logfile= open(options.prefix+'.log','wb')
+
 
 def lookup(seq) :
 	blockId= []
@@ -170,7 +184,7 @@ def lookup(seq) :
 # filenames: .fastq files
 for filename in args :
 
-	print "reading", filename
+	message = "Reading '%s'\n" % filename
 
 	linenum= 0
 	reading= 0
@@ -217,35 +231,48 @@ for filename in args :
 				Unique[combiId]['total'] = 1
 				Unique[combiId]['set']= set([randomSeq])
 
-	print "read", reading, "sequences"
-	print "success", success
-
-	logfile.write(filename+"\n")
-	logfile.write("reading %d\n" % reading)
-	logfile.write("success %d\n" % success)
+	message += "number of seq.= %d (success= %d)\n" % (reading, success)
+	print message
+	logfile.write(message+"\n")
 
 # write out csv output
-
+message= "Writing sequence counts"
+print message
+logfile.write(message+"\n")
 for i in range(1,numbb+1) :
 	for j in combinations(range(1,numbb+1), i) :
 		classId= ''.join(map(str,j))
-		csvfile= open(options.prefix+'_'+classId+'.csv','wb')
+		filename= options.prefix+'_'+classId+'.csv'
+		csvfile= open(filename,'w')
+		print filename
+		logfile.write(filename+"\n")
  		csvout= csv.writer(csvfile, delimiter=',', quotechar='"',)
 		header= ['Class']
 		for k in j :
 			header.append('block%d' % k)
 		header.append('count')
 		csvout.writerow( header )
-		for k in sorted(Count[i][classId], 
+		normwrt= None # normalize with respect to normwrt
+		for k in sorted(Count[i][classId],
 			key= Count[i][classId].get, reverse= True) :
 			row= [ classId ]
 			row.extend ( k.split() )
 			row.append ( Count[i][classId][k] )
+			if options.normalize :
+				if normwrt :
+					row.append ( 1. * float(Count[i][classId][k]) / normwrt)
+				else :
+					normwrt= float(Count[i][classId][k])
+					row.append ( 1. )
 			csvout.writerow( row )
 
-# write out amplification factor
 
-csvfile= open(options.prefix+'_unique.csv','wb')
+# write out amplification factor
+filename= options.prefix+'_unique.csv'
+csvfile= open(filename,'w')
+message = "\nWriting sequence uniqueness to '%s'" % filename
+print message
+logfile.write(message+"\n")
 csvout= csv.writer(csvfile, delimiter=',', quotechar='"',)
 header= []
 for i in range(1,numbb+1) :

@@ -12,14 +12,17 @@ Options:
   -e ENCODING, --encoding=ENCODING
                         input encoding scheme file
   -b BBS, --bbseq=BBS   input building block sequence file
-  -r, --revcomp         option for reverse complementary trial
+  -r, --revcomp         option to try reverse complementary seq.
+			in case of sequencing in both directions
+  -n, --normalize       option to normalize seq. count
+			with respect to the largest seq. count
 ```
 
 ## How to run the test data
 
 ```
 cd test
-python ../decode.py -b BBS.txt -e encoding.txt -p bae ../data/testlg.fastq
+python ../decode.py -b BBS.txt -e encoding.txt -r -n -p bae ../data/testlg.fastq
 ```
 
 ## DNA encoding file format (-e filename or --encoding=filename)
