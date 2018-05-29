@@ -62,17 +62,17 @@ def read_building_block_sequence(filename):
         try:
             (seq, mol, cyc) = (col[0], col[1], col[2])
         except:
-            print "[Error] expecting 3 columns for each line: <sequence> <building-block-id> <cycle-number>"
-            print "[Error] line %d: %s" % (linenumber, line)
+            print("[Error] expecting 3 columns for each line: <sequence> <building-block-id> <cycle-number>")
+            print("[Error] line %d: %s" % (linenumber, line))
             sys.exit(1)
 
         if not cyc in mapobj:
             mapobj[cyc] = {}
 
         if seq in mapobj[cyc]:
-            print "[Error] identical sequence already assigned to a building block %s for cycle %s" % (
-                mapobj[cyc][seq], cyc)
-            print "[Error] line %d: %s" % (linenumber, line)
+            print("[Error] identical sequence already assigned to a building block %s for cycle %s" % (
+                mapobj[cyc][seq], cyc))
+            print("[Error] line %d: %s" % (linenumber, line))
             sys.exit(2)
         else:
             mapobj[cyc][seq] = mol
@@ -102,7 +102,7 @@ def lookup(seq):
         if numrs > 0:
             blockId.append(m.group('rnd'))
     except:
-        return []
+        blockId = []
     return blockId
 
 
@@ -152,14 +152,14 @@ message = "Reading encoding scheme from '%s'\n" % options.encoding
 message += "regex= %s\n" % scheme
 message += "number of building blocks= %d\n" % numbb
 message += "number of random seq. blocks= %d\n" % numrs
-print message
+print(message)
 logfile.write(message + "\n")
 
 
 """ read building block sequence info. """
 BBTag = read_building_block_sequence(options.bbseq)
 message = "Reading building blocks from '%s'\n" % options.bbseq
-print message
+print(message)
 logfile.write(message + "\n")
 
 
@@ -171,7 +171,7 @@ for fileIdx in range(len(args)): # .fastq files
     for i in range(1, numbb + 1):
         Count[fileIdx][i]= {}
         CountSum[fileIdx][i]= {}
-        for j in combinations(range(1, numbb + 1), i):
+        for j in combinations(list(range(1, numbb + 1)), i):
             classId= ''.join(map(str, j))
             Count[fileIdx][i][classId]= {}
             CountSum[fileIdx][i][classId]= 0
@@ -194,16 +194,14 @@ for fileIdx, filename in enumerate(args):
             blockId = lookup(raw)
             if not blockId and options.revcomp : # try again
                 blockId = lookup(revcomp(raw))
-                if not blockId:
-                    continue
-            else:
+            if not blockId:
                 continue
 
             success += 1
 
             # store blockId
             for i in range(1, numbb + 1):
-                for j in combinations(range(1, numbb + 1), i):
+                for j in combinations(list(range(1, numbb + 1)), i):
                     classId = ''.join(map(str, j))
                     combiId = []
                     for k in j:
@@ -227,20 +225,20 @@ for fileIdx, filename in enumerate(args):
                 Unique[fileIdx][combiId]['set'] = {randomSeq}
 
     message += "number of seq.= %d (success= %d)\n" % (reading, success)
-    print message
+    print(message)
     logfile.write(message + "\n")
 
 """ write out csv output """
 message = "Writing sequence counts"
-print message
+print(message)
 logfile.write(message + "\n")
 
 for i in range(1, numbb + 1):
-    for j in combinations(range(1, numbb + 1), i):
+    for j in combinations(list(range(1, numbb + 1)), i):
         classId = ''.join(map(str, j))
         filename = options.prefix + '_' + classId + '.csv'
         csvfile = open(filename, 'w')
-        print filename
+        print(filename)
         logfile.write(filename + "\n")
 
         # For a given classId,
@@ -298,7 +296,7 @@ for i in range(1, numbb + 1):
 filename = options.prefix + '_unique.csv'
 csvfile = open(filename, 'w')
 message = "\nWriting sequence uniqueness to '%s'" % filename
-print message
+print(message)
 logfile.write(message + "\n")
 csvout = csv.writer(csvfile, delimiter=',', quotechar='"', )
 
