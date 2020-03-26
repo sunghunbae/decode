@@ -179,7 +179,11 @@ Reading FASTQ file(s)......
 In the above log file, the first partly matched sequence match up to three building blocks and
 the second partly matched sequence match up to three building blocks and randome sequence block but fail to match the closing sequence at the very 3' end. We can rescue partly mismatched sequences
 by excluding the closing sequence and/or random sequence blocks:
-scheme= AAATCGATGTG{6}GAG{6}AGT{6}CGAACTGAATCTACT(12) or AAATCGATGTG{6}GAG{6}AGT{6}CGA)
+
+
+Examples of modified schemes:
+AAATCGATGTG{6}GAG{6}AGT{6}CGAACTGAATCTACT(12)
+AAATCGATGTG{6}GAG{6}AGT{6}CGA
 
 
 ## Use multiple FASTQ files for comparing different datasets
