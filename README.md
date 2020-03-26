@@ -182,8 +182,9 @@ by excluding the closing sequence and/or random sequence blocks:
 
 
 Examples of modified schemes:
-AAATCGATGTG{6}GAG{6}AGT{6}CGAACTGAATCTACT(12)
-AAATCGATGTG{6}GAG{6}AGT{6}CGA
+
+- AAATCGATGTG{6}GAG{6}AGT{6}CGAACTGAATCTACT(12)
+- AAATCGATGTG{6}GAG{6}AGT{6}CGA
 
 
 ## Use multiple FASTQ files for comparing different datasets
