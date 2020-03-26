@@ -13,7 +13,6 @@ Options:
                         input encoding scheme file
   -b BBS, --bbseq=BBS   input building block sequence file
   -r, --revcomp         option to try reverse complementary seq.
-			                  in case of sequencing in both directions
   -y, --partly          option to report partly matched sequences
 ```
 
@@ -96,7 +95,7 @@ B0@<DH@1<11D<FHFH1C<CCGEEEHHH//C/<F=0FG@FEH1FC?C0D/DC<D<@1<<CE<GH1GHGF?C/<<C1<FF
 ## Troubleshooting or rescuing unsuccessful matches (`--partly` or `-y` option)
 
 During building a DNA encoded library, DNA sequence tag is appended as new building blocks are added to a starting scaffold.
-These stepwise DNA ligations may introduce a sequence mismatch at certain step and DNA sequence upto that step may be 
+These stepwise DNA ligations may introduce a sequence mismatch at certain step and DNA sequence up to that step may be 
 still usable by modifying the encoding file (truncating the 3' part from that step). 
 Using `-y` or `--partly` option turns on testing and reporting of stepwise matching.
 For example, if the encoding has three building blocks and one random sequence block, it would test partial matching of sequences
