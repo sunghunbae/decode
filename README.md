@@ -13,14 +13,15 @@ Options:
                         input encoding scheme file
   -b BBS, --bbseq=BBS   input building block sequence file
   -r, --revcomp         option to try reverse complementary seq.
-			in case of sequencing in both directions
+			                  in case of sequencing in both directions
+  -y, --partly          option to report partly matched sequences
 ```
 
 ## How to run the test data
 
 ```
 cd test
-python ../decode.py -b BBS.txt -e encoding.txt -r -p bae ../data/testlg.fastq
+python ../decode.py -e encoding.txt -b BBS.txt -r ../data/testlg.fastq
 ```
 
 ## DNA encoding file format (-e filename or --encoding=filename)
@@ -50,7 +51,9 @@ is equivalent to
 AAATCGATGTG{6}GAG{6}AGT{6}CGAACTGAATCTACT(12)TCAGACAAGCTTCACCTGC
 ```
 
-Both of above example files describe an identical DNA encoding scheme in which 3 building blocks of 6 bases and a random sequence of 12 bases are placed between defined constant DNA sequence blocks(i.e. opening, cycle, closing, terminal tag sequences). NGS sequences are to be aligned with the encoding scheme. For instance, the following sequence satisfies the above encoding scheme.
+Both of above example files describe an identical DNA encoding scheme in which 3 building blocks of 6 bases and a random sequence of 12 bases are placed between defined constant DNA sequence blocks(i.e. opening, cycle, closing, terminal tag sequences). NGS sequences are to be aligned with the encoding scheme. For instance, the following sequence satisfies the above encoding scheme. Note that additional
+sequences before 5' end or after 3' end also satisfy the above encoding scheme. But a single nucleotide 
+difference inside the scheme results in mismatch.
 
 ```AGTTGACTCCCAAATCGATGTGTGTATGGAGGCTATGAGTGCTGGCCGAACTGAATCTACTAGGGAGAGTGCGTCAGACAAGCTTCACCTGCAATAGATCG```
 
@@ -74,7 +77,7 @@ GCTTTC FAa-005 1 10K DEL
 
 ## FASTQ file format
 
-In FASTQ format, every second line in a record contains DNA sequence.
+In FASTQ format, each record has four lines and the second line contains the DNA sequence.
 
 ### Example (testlg.fastq)
 ```
@@ -89,6 +92,21 @@ B0@<DH@1<11D<FHFH1C<CCGEEEHHH//C/<F=0FG@FEH1FC?C0D/DC<D<@1<<CE<GH1GHGF?C/<<C1<FF
 ......
 ```
 
+
+## Troubleshooting or rescuing unsuccessful matches (`--partly` or `-y` option)
+
+During building a DNA encoded library, DNA sequence tag is appended as new building blocks are added to a starting scaffold.
+These stepwise DNA ligations may introduce a sequence mismatch at certain step and DNA sequence upto that step may be 
+still usable by modifying the encoding file (truncating the 3' part from that step). 
+Using `-y` or `--partly` option turns on testing and reporting of stepwise matching.
+For example, if the encoding has three building blocks and one random sequence block, it would test partial matching of sequences
+in the order of bb1-bb2-bb3-rnd, bb1-bb2-bb3, bb1-bb2, bb1 until it finds the longest match.
+
+```
+python ../decode.py -e encoding.txt -b BBS.txt -r -y ../data/testsm.fastq
+```
+
+
 ## Use multiple FASTQ files for comparing different datasets
 
 A sequencing dataset of a target can be compared with a control dataset without the target protein, 
@@ -97,7 +115,7 @@ The first FASTQ file is used to sort building blocks and the rest of the FASTQ f
 with this first FASTQ file.
 
 ```
-python ../decode.py -b BBS.txt -e encoding.txt -r -p bae ../data/testlg.fastq ../data/testsm.fastq
+python ../decode.py -e encoding.txt -b BBS.txt -r ../data/testlg.fastq ../data/testsm.fastq
 ```
 
 
