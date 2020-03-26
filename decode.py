@@ -7,6 +7,7 @@ import sys
 import csv
 import os
 import re
+import gzip
 
 class Transcript(object):
     def __init__(self, filename):
@@ -172,43 +173,82 @@ class DNAEncoded(object):
             reading = 0
             success = 0
             partly  = 0
-            with open(filename, 'rt') as fastq:
-                if not self.silent:
-                    print("  S{}= {}".format(fileIdx, filename))
-                for line in fastq:
-                    linenum += 1
-                    if linenum % 4 == 2:  # sequence info resides at the second line
-                        s = line.strip()
-                        reading += 1
-                        # note: regular expression is strict
-                        blockId = self.lookup_subprocess(s,self.regex)
-                        if not blockId and self.options.revcomp: # try again
-                            blockId = self.lookup_subprocess(self.revcomp(s),self.regex)
-                        if blockId:
-                            success += 1
-                            self.count(fileIdx, blockId)
-                        elif options.partly: # why doesn't it strictly match?
-                            partial_blockId = []
-                            for i in range(len(self.regex_build)-1,0,-1):
-                                partial_regex = ''.join(self.regex_build[:i])
-                                blockId = self.lookup_subprocess(s,partial_regex)
-                                if not blockId and self.options.revcomp: # try again
-                                    blockId = self.lookup_subprocess(self.revcomp(s),partial_regex)
-                                if blockId:
-                                    partial_blockId = blockId
-                                    break
-                            if partial_blockId:
-                                partly += 1
-                                if not self.silent:
-                                    print("  [{:6d} / {:6d}] partly matched {}".format(
-                                        partly, reading, ','.join(partial_blockId)))
-                total_success += success
-                if not self.silent:
-                    if options.partly:
-                        print("  number of sequences= {}, success= {}, partly= {}".format(
-                            reading, success, partly))
-                    else:
-                        print("  number of sequences= {}, success= {}".format(reading, success))
+            if filename.endswith(".gz") :
+                with gzip.open(filename, 'rt') as fastq:
+                    if not self.silent:
+                        print("  S{}= {}".format(fileIdx, filename))
+                    for line in fastq:
+                        linenum += 1
+                        if linenum % 4 == 2:  # sequence info resides at the second line
+                            s = line.strip()
+                            reading += 1
+                            # note: regular expression is strict
+                            blockId = self.lookup_subprocess(s,self.regex)
+                            if not blockId and self.options.revcomp: # try again
+                                blockId = self.lookup_subprocess(self.revcomp(s),self.regex)
+                            if blockId:
+                                success += 1
+                                self.count(fileIdx, blockId)
+                            elif options.partly: # why doesn't it strictly match?
+                                partial_blockId = []
+                                for i in range(len(self.regex_build)-1,0,-1):
+                                    partial_regex = ''.join(self.regex_build[:i])
+                                    blockId = self.lookup_subprocess(s,partial_regex)
+                                    if not blockId and self.options.revcomp: # try again
+                                        blockId = self.lookup_subprocess(self.revcomp(s),partial_regex)
+                                    if blockId:
+                                        partial_blockId = blockId
+                                        break
+                                if partial_blockId:
+                                    partly += 1
+                                    if not self.silent:
+                                        print("  [{:6d} / {:6d}] partly matched {}".format(
+                                            partly, reading, ','.join(partial_blockId)))
+                    total_success += success
+                    if not self.silent:
+                        if options.partly:
+                            print("  number of sequences= {}, success= {}, partly= {}".format(
+                                reading, success, partly))
+                        else:
+                            print("  number of sequences= {}, success= {}".format(reading, success))
+            else:
+                with open(filename, 'rt') as fastq:
+                    if not self.silent:
+                        print("  S{}= {}".format(fileIdx, filename))
+                    for line in fastq:
+                        linenum += 1
+                        if linenum % 4 == 2:  # sequence info resides at the second line
+                            s = line.strip()
+                            reading += 1
+                            # note: regular expression is strict
+                            blockId = self.lookup_subprocess(s,self.regex)
+                            if not blockId and self.options.revcomp: # try again
+                                blockId = self.lookup_subprocess(self.revcomp(s),self.regex)
+                            if blockId:
+                                success += 1
+                                self.count(fileIdx, blockId)
+                            elif options.partly: # why doesn't it strictly match?
+                                partial_blockId = []
+                                for i in range(len(self.regex_build)-1,0,-1):
+                                    partial_regex = ''.join(self.regex_build[:i])
+                                    blockId = self.lookup_subprocess(s,partial_regex)
+                                    if not blockId and self.options.revcomp: # try again
+                                        blockId = self.lookup_subprocess(self.revcomp(s),partial_regex)
+                                    if blockId:
+                                        partial_blockId = blockId
+                                        break
+                                if partial_blockId:
+                                    partly += 1
+                                    if not self.silent:
+                                        print("  [{:6d} / {:6d}] partly matched {}".format(
+                                            partly, reading, ','.join(partial_blockId)))
+                    total_success += success
+                    if not self.silent:
+                        if options.partly:
+                            print("  number of sequences= {}, success= {}, partly= {}".format(
+                                reading, success, partly))
+                        else:
+                            print("  number of sequences= {}, success= {}".format(reading, success))
 
         if not self.silent:
             print()

@@ -20,7 +20,38 @@ Options:
 
 ```
 cd test
-python ../decode.py -e encoding.txt -b BBS.txt -r ../data/testlg.fastq
+python ../decode.py -e encoding.txt -b BBS.txt -r ../data/testlg.fastq.gz
+```
+
+### Example CSV output files
+
+`decoded_1.csv`
+```
+Class,block1,cnt_S0,pop_S0
+1,FAa-004,3519,5.38625197067332
+1,FAa-013,3440,5.265332986392788
+1,FAa-006,3431,5.251557405905132
+1,FAa-001,3387,5.184210123521038
+......
+```
+
+`decoded_12.csv`
+```
+Class,block1,block2,cnt_S0,pop_S0
+12,FAa-006,Am-010,219,0.335205791866285
+12,FAa-009,Am-010,199,0.30459339078260605
+12,FAa-013,Am-022,198,0.3030627707284221
+12,FAa-009,Am-004,193,0.2954096704575023
+......
+```
+
+`decoded_123.csv`
+```
+Class,block1,block2,block3,cnt_S0,pop_S0
+123,FAa-006,Am-054,Am-063,16,0.0244899208669432
+123,FAa-009,Am-005,Am-007,16,0.0244899208669432
+123,FAa-004,Am-006,Am-022,16,0.0244899208669432
+...
 ```
 
 ## DNA encoding file format (-e filename or --encoding=filename)
@@ -102,7 +133,47 @@ For example, if the encoding has three building blocks and one random sequence b
 in the order of bb1-bb2-bb3-rnd, bb1-bb2-bb3, bb1-bb2, bb1 until it finds the longest match.
 
 ```
-python ../decode.py -e encoding.txt -b BBS.txt -r -y ../data/testsm.fastq
+python ../decode.py -e encoding.txt -b BBS.txt -r -p partly -y ../data/testlg.fastq.gz
+```
+
+`partly.log`
+```
+$ ../decode.py -e encoding.txt -b BBS.txt -r -p partly -y ../data/testlg.fastq.gz
+Encoding scheme
+  filename= encoding.txt
+  scheme= AAATCGATGTG{6}GAG{6}AGT{6}CGAACTGAATCTACT(12)TCAGACAAGCTTCACCTGC
+  number of building blocks= 3
+  number of random sequence blocks= 1
+
+Building block sequences
+  filename= BBS.txt
+  cycle 1 number of building block sequences= 23
+  cycle 2 number of building block sequences= 24
+  cycle 3 number of building block sequences= 28
+
+Reading FASTQ file(s)......
+  S0= ../data/testlg.fastq.gz
+  [     1 /      2] partly matched FAa-018,Am-010,Am-011
+  [     2 /      3] partly matched FAa-023,Am-002,Am-001,TCATGCTCACAA
+  [     3 /     11] partly matched FAa-018,Am-022,Am-032
+  [     4 /     14] partly matched FAa-004,Am-030,Am-062,CCCATCTTTAGT
+  [     5 /     23] partly matched FAa-004,Am-062,Am-036
+  [     6 /     25] partly matched FAa-018,Am-041,Am-062
+  [     7 /     26] partly matched FAa-017,Am-023,Am-023,ACGAATTGCACG
+  [     8 /     27] partly matched FAa-002,Am-001,Am-011,CCACTCGGTCGT
+  [     9 /     30] partly matched FAa-012,Am-022,Am-041,ATAAATGGGTAT
+  [    10 /     31] partly matched FAa-004,Am-063,Am-022,CCCACGTGTCTG
+  [    11 /     38] partly matched FAa-010,Am-023,Am-010,ACATTGCAACTG
+  [    12 /     43] partly matched FAa-014,Am-005,Am-054,ACGCGAATGGTG
+  [    13 /     46] partly matched FAa-023,Am-005,Am-022,GCTTGGGCTTCA
+  [    14 /     51] partly matched FAa-012,Am-016,Am-022
+  [    15 /     71] partly matched FAa-008,Am-023,Am-062,CGTTCCCTTAGC
+  [    16 /     72] partly matched FAa-019,Am-062,Am-022,ATGCAATAAAAT
+  [    17 /     74] partly matched FAa-018,Am-017,Am-035,CCATTACTTCTC
+  [    18 /     84] partly matched FAa-001,Am-032,Am-002,TAGATGAGTGAA
+  [    19 /    114] partly matched FAa-012,Am-005,Am-008,TACCCCTCTCGC
+  [    20 /    119] partly matched FAa-007,Am-062,Am-008,GATCTTAAAGTT
+......
 ```
 
 
@@ -114,7 +185,7 @@ The first FASTQ file is used to sort building blocks and the rest of the FASTQ f
 with this first FASTQ file.
 
 ```
-python ../decode.py -e encoding.txt -b BBS.txt -r ../data/testlg.fastq ../data/testsm.fastq
+python ../decode.py -e encoding.txt -b BBS.txt -r ../data/testlg.fastq.gz ../data/testsm.fastq.gz
 ```
 
 
